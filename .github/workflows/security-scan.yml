@@ -1,0 +1,23 @@
+name: 'Security Scan with FortiDevSec'
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  fortidevsec-scan:
+    name: FortiDevSec Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run FortiDevSec Scan
+        uses: fortinet/fortidevsec-action@v1
+        with:
+          # Paste your Application ID from the FortiDevSec portal
+          app_id: 'YOUR_FORTIDEVSEC_APPLICATION_ID'
+          # This will fail the build if high-risk issues are found
+          fail_on_high: true
